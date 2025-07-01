@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+#mock-login e logout(testes de autenticação)
+src/app/api/mock-login/
+src/app/api/mock-logout/
