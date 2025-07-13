@@ -1,9 +1,7 @@
 from fastapi import FastAPI;
+from app.api.v1.routes import user
 
 
-app = FastAPI();
+app = FastAPI(debug=True);
 
-@app.get("/")
-
-async def read_root():
-    return {"message": "Hello World!"}
+app.include_router(user.router)
