@@ -75,6 +75,7 @@ export default function RegisterForm({ onToggleMode }: RegisterFormProps) {
           buttonType="submit"
           buttonText="Sign up"
           isLoading={register.isPending}
+          isDisabled={register.isPending}
         />
       </form>
       <div className="flex justify-center border-t-gray-300 border-t-1 pt-5">
