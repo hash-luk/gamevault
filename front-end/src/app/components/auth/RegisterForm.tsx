@@ -4,29 +4,28 @@ import Button from "../ui/Button";
 import { useRegister } from "@/app/hooks/useRegister";
 import { useState } from "react";
 import { toast } from "sonner";
+import { registerSchema, RegisterFormValues } from "@/app/lib/register-schema";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface RegisterFormProps {
   onToggleMode: () => void;
 }
 
 export default function RegisterForm({ onToggleMode }: RegisterFormProps) {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-
   const register = useRegister();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  const {
+    register: formRegister,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<RegisterFormValues>({
+    resolver: zodResolver(registerSchema),
+  });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const onSubmit = async (data: RegisterFormValues) => {
     try {
-      await register.mutateAsync(form);
+      await register.mutateAsync(data);
       toast.success("User registered successfully");
 
       setTimeout(() => {
@@ -43,7 +42,7 @@ export default function RegisterForm({ onToggleMode }: RegisterFormProps) {
   return (
     <>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col justify-center gap-4"
       >
         <InputField
@@ -52,16 +51,22 @@ export default function RegisterForm({ onToggleMode }: RegisterFormProps) {
           inputPlaceholder="Enter your username"
           label="Username"
           icon={User}
-          onChange={handleChange}
+          {...formRegister("name")}
         />
+        {errors.name && (
+          <p className="text-red-500 text-sm">{errors.name.message}</p>
+        )}
         <InputField
           inputID="email"
           inputName="email"
           inputPlaceholder="Enter your email"
           label="Email"
           icon={Mail}
-          onChange={handleChange}
+          {...formRegister("email")}
         />
+        {errors.email && (
+          <p className="text-red-500 text-sm">{errors.email.message}</p>
+        )}
         <InputField
           inputID="password"
           inputName="password"
@@ -69,8 +74,11 @@ export default function RegisterForm({ onToggleMode }: RegisterFormProps) {
           inputType="password"
           label="Password"
           icon={LockKeyhole}
-          onChange={handleChange}
+          {...formRegister("password")}
         />
+        {errors.password && (
+          <p className="text-red-500 text-sm">{errors.password.message}</p>
+        )}
         <Button
           buttonType="submit"
           buttonText="Sign up"
