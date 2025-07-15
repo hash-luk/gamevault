@@ -1,4 +1,5 @@
 import { LucideIcon } from "lucide-react";
+import { clsx } from "clsx";
 
 interface inputProps {
   inputType?: string;
@@ -7,6 +8,7 @@ interface inputProps {
   inputPlaceholder: string;
   label?: string;
   icon?: LucideIcon;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function InputField({
@@ -16,6 +18,7 @@ export default function InputField({
   inputPlaceholder,
   label,
   icon: Icon,
+  onChange,
 }: inputProps) {
   return (
     <div className="flex flex-col items-start flex-start gap-2">
@@ -30,9 +33,11 @@ export default function InputField({
           name={inputName}
           id={inputID}
           placeholder={inputPlaceholder}
-          className={`w-full pl-${
-            Icon ? "9" : "3"
-          } pr-3 h-10 rounded border border-gray-300 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
+          className={clsx(
+            "w-full pr-3 h-10 rounded border border-gray-300 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
+            Icon ? "pl-9" : "pl-3"
+          )}
+          onChange={onChange}
         />
         {Icon && (
           <Icon
