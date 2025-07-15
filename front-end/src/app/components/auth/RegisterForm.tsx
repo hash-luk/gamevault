@@ -64,7 +64,11 @@ export default function RegisterForm({ onToggleMode }: RegisterFormProps) {
           icon={LockKeyhole}
           onChange={handleChange}
         />
-        <Button buttonType="submit" buttonText="Sign up" />
+        <Button
+          buttonType="submit"
+          buttonText="Sign up"
+          isLoading={register.isPending}
+        />
       </form>
       <div className="flex justify-center border-t-gray-300 border-t-1 pt-5">
         <div className="flex">
