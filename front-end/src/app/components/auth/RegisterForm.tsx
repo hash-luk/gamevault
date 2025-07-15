@@ -3,6 +3,7 @@ import InputField from "../ui/Input";
 import Button from "../ui/Button";
 import { useRegister } from "@/app/hooks/useRegister";
 import { useState } from "react";
+import { toast } from "sonner";
 
 interface RegisterFormProps {
   onToggleMode: () => void;
@@ -26,10 +27,16 @@ export default function RegisterForm({ onToggleMode }: RegisterFormProps) {
 
     try {
       await register.mutateAsync(form);
-      alert("Usuário registrado com sucesso");
-      onToggleMode();
+      toast.success("User registered successfully");
+
+      setTimeout(() => {
+        onToggleMode();
+      }, 1500);
     } catch (error) {
-      console.error("Erro ao registrar:", error);
+      toast.error(
+        "There was an error when trying to register, please try later"
+      );
+      console.error("Error:", error);
     }
   };
 
