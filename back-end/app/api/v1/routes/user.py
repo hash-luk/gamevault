@@ -1,17 +1,10 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from app.db.session import SessionLocal
+from app.db.session import get_db
 from app.schemas.user import UserCreate,UserUpdate,UserOut
 from app.crud.user import (get_users, create_user, get_user_by_id, update_user, delete_user)
 
 router = APIRouter(prefix="/users", tags=["Users"])
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 @router.get("/", response_model=list[UserOut])
 def list_users(db: Session = Depends(get_db)):
