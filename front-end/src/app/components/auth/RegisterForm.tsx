@@ -2,7 +2,6 @@ import { LockKeyhole, Mail, User } from "lucide-react";
 import InputField from "../ui/Input";
 import Button from "../ui/Button";
 import { useRegister } from "@/app/hooks/useRegister";
-import { useState } from "react";
 import { toast } from "sonner";
 import { registerSchema, RegisterFormValues } from "@/app/lib/register-schema";
 import { useForm } from "react-hook-form";

@@ -1,23 +1,31 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { jwtVerify } from "jose";
 
-export default function middleware(request: NextRequest) {
-  const token = request.cookies.get("auth_token")?.value;
-  const isLoginPage = request.nextUrl.pathname === "/login";
+export default async function middleware(request: NextRequest) {
+  const secret = new TextEncoder().encode(process.env.JWT_SECRET_KEY);
+  const token = request.cookies.get("_session")?.value;
+  const loginUrl = new URL("/auth", request.url);
 
-  if (!token && !isLoginPage) {
-    return NextResponse.redirect(new URL("/login", request.url));
+  if (!token) {
+    return NextResponse.redirect(loginUrl);
   }
 
-  if (token && isLoginPage) {
-    return NextResponse.redirect(new URL("/", request.url));
-  }
+  try {
+    const { payload } = await jwtVerify(token, secret, {
+      algorithms: ["HS256"],
+    });
 
-  return NextResponse.next();
+    return NextResponse.next();
+  } catch (error) {
+    console.log(error);
+    return NextResponse.redirect(loginUrl);
+  }
 }
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|api/mock-login|api/logout).*)",
+    // Aplica o middleware para todas as rotas, exceto as listadas abaixo
+    "/((?!_next/static|_next/image|favicon.ico|auth|api/auth|api/logout).*)",
   ],
 };
