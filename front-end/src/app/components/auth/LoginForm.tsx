@@ -27,7 +27,7 @@ export default function LoginForm({ onToggleMode }: RegisterFormProps) {
   const onSubmit = async (data: LoginFormValues) => {
     try {
       await auth.mutateAsync(data);
-      router.push("/");
+      router.push("/home");
     } catch (err) {
       console.log(err);
     }

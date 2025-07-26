@@ -16,6 +16,8 @@ export default async function middleware(request: NextRequest) {
       algorithms: ["HS256"],
     });
 
+    NextResponse.redirect(new URL("/home", request.url));
+
     return NextResponse.next();
   } catch (error) {
     console.log(error);
