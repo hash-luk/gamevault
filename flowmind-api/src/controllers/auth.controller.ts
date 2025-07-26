@@ -22,8 +22,20 @@ export const login = async (req: Request, res: Response) => {
     httpOnly: true,
     secure: false,
     sameSite: "lax",
+    path: "/",
     maxAge: 1000 * 60 * 60,
   });
 
   res.json({ success: true });
+};
+
+export const signOut = (req: Request, res: Response) => {
+  res.clearCookie("_session", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "lax",
+    path: "/",
+  });
+
+  return res.status(200).json({ message: "Signed out successfully" });
 };

@@ -21,9 +21,22 @@ import {
 } from "lucide-react";
 
 import { useMediaQuery } from "@/app/hooks/useMediaQuery";
+import { useRouter } from "next/navigation";
+import { useSignOut } from "@/app/hooks/useAuth";
 
 export default function Header() {
+  const signOut = useSignOut();
+  const router = useRouter();
   const isMobile = useMediaQuery("(max-width: 768px)");
+
+  const handleSignOut = async () => {
+    try {
+      await signOut.mutateAsync();
+      router.push("/auth");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
@@ -67,7 +80,7 @@ export default function Header() {
                 <MoonIcon />
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleSignOut()}>
                 <LogOutIcon />
                 Sign out
               </DropdownMenuItem>
