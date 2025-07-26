@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import Header from "../components/ui/Header";
+import Header from "../components/structure/Header";
 
 export default function AuthenticatedLayout({
   children,
