@@ -23,8 +23,11 @@ import {
 import { useMediaQuery } from "@/app/hooks/useMediaQuery";
 import { useRouter } from "next/navigation";
 import { useSignOut } from "@/app/hooks/useAuth";
+import { useUser } from "@/app/hooks/useUser";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Header() {
+  const { data: user, isLoading } = useUser();
   const signOut = useSignOut();
   const router = useRouter();
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -52,17 +55,33 @@ export default function Header() {
           </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <div className="size-8">
-                <Avatar className="hover:cursor-pointer">
-                  <AvatarImage
-                    src="https://github.com/shadcn.png"
-                    className="rounded-full"
-                  />
-                  <AvatarFallback>UserName</AvatarFallback>
-                </Avatar>
-              </div>
+              {isLoading ? (
+                <Skeleton className="size-8 rounded-full" />
+              ) : (
+                <div className="size-8">
+                  <Avatar className="hover:cursor-pointer">
+                    <AvatarImage
+                      src="https://github.com/shadcn.png"
+                      className="rounded-full"
+                    />
+                    <AvatarFallback>{user?.name}</AvatarFallback>
+                  </Avatar>
+                </div>
+              )}
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56 bg-popover" align="center">
+              {isLoading ? (
+                <div>
+                  <Skeleton className="h-4 w-3/4" />
+                  <Skeleton className="h-4 w-1/2" />
+                </div>
+              ) : (
+                <div>
+                  <p className="font-medium">{user?.name}</p>
+                  <p className="text-sm text-gray-500">{user?.email}</p>
+                </div>
+              )}
+              <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <User /> Profile
               </DropdownMenuItem>

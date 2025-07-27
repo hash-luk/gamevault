@@ -1,16 +1,29 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import { hashPassword } from "../utils/crypto";
+import { error } from "console";
 
 const prisma = new PrismaClient();
 
-export const getUser = async (req: Request, res: Response) => {
-  const id = parseInt(req.params.id);
-  const user = await prisma.user.findUnique({ where: { id } });
+export const getMe = async (req: Request, res: Response) => {
+  const userID = (req as any).userId;
+
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userID,
+    },
+    select: {
+      id: true,
+      email: true,
+      name: true,
+    },
+  });
 
   if (!user) {
     return res.status(404).json({ error: "User not found" });
   }
+
+  console.log(user);
 
   res.json(user);
 };
