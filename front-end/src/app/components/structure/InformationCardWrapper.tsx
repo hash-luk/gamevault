@@ -38,20 +38,18 @@ export default function InformationCardWrapper() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-8 gap-2">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        {cardTypes.map((card, index) => (
-          <InformationCard
-            title={card.title}
-            additionalInfo={card.additionalInfo}
-            gameQTD={card.quantity}
-            Icon={card.Icon}
-            additionalTextColor={card.additionalTextColor}
-            iconColor={card.iconColor}
-            key={index}
-          />
-        ))}
-      </div>
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      {cardTypes.map((card, index) => (
+        <InformationCard
+          title={card.title}
+          additionalInfo={card.additionalInfo}
+          gameQTD={card.quantity}
+          Icon={card.Icon}
+          additionalTextColor={card.additionalTextColor}
+          iconColor={card.iconColor}
+          key={index}
+        />
+      ))}
     </div>
   );
 }
