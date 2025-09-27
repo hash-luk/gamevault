@@ -1,2 +1,2 @@
-<h1 style="text-align: center">FlowMind</h1>
+<h1 style="text-align: center">Gamevault</h1>
 <p style="text-align: center">Under construction 🚧</p>
