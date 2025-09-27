@@ -1,0 +1,16 @@
+[
+  {
+    "id": 9,
+    "title": "Cyberpunk 2077",
+    "imageCoverPath": "/default-cover.png",
+    "gameGenre": "RPG",
+    "dropedAt": "2025-09-01"
+  },
+  {
+    "id": 10,
+    "title": "Assassin's Creed Valhalla",
+    "imageCoverPath": "/default-cover.png",
+    "gameGenre": "Ação/Aventura",
+    "dropedAt": "2025-08-15"
+  }
+]

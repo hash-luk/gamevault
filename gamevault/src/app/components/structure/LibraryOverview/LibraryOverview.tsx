@@ -8,33 +8,11 @@ import {
 import { BarChart3, PlayCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import GameCard from "./GameCard";
-
-const games = [
-  {
-    id: 1,
-    title: "Hollow Knight",
-    imageCoverPath: "images/hollow_knight.jpg",
-    gameGenre: "Metroidvania",
-    timePlayed: "42h 15min",
-    progress: 87,
-  },
-  {
-    id: 2,
-    title: "The Witcher 3",
-    imageCoverPath: "images/witcher3.jpg",
-    gameGenre: "RPG",
-    timePlayed: "120h 33min",
-    progress: 65,
-  },
-  {
-    id: 3,
-    title: "EA FC 24",
-    imageCoverPath: "images/fifa24.jpg",
-    gameGenre: "Esporte",
-    timePlayed: "55h 20min",
-    progress: 45,
-  },
-];
+import { useEffect, useState } from "react";
+import currentlyPlaying from "@/data/currentlyPlaying.json";
+import recentPlatinums from "@/data/recentPlatinums.json";
+import nextInBacklog from "@/data/nextInBacklog.json";
+import recentlyDropped from "@/data/recentlyDropped.json";
 
 export default function LibraryOverview() {
   return (
@@ -64,7 +42,7 @@ export default function LibraryOverview() {
                   </Badge>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {games.map((game) => (
+                  {currentlyPlaying.map((game) => (
                     <GameCard
                       key={game.id}
                       title={game.title}

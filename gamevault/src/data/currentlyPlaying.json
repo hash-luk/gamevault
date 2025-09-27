@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Hollow Knight",
+    "imageCoverPath": "/default-cover.png",
+    "gameGenre": "Metroidvania",
+    "timePlayed": "42h 15min",
+    "progress": 87
+  },
+  {
+    "id": 2,
+    "title": "The Witcher 3: Wild Hunt",
+    "imageCoverPath": "/default-cover.png",
+    "gameGenre": "RPG",
+    "timePlayed": "120h 33min",
+    "progress": 65
+  },
+  {
+    "id": 3,
+    "title": "FIFA 23",
+    "imageCoverPath": "/default-cover.png",
+    "gameGenre": "Esporte",
+    "timePlayed": "55h 20min",
+    "progress": 45
+  }
+]

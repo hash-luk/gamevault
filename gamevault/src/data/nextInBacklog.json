@@ -1,0 +1,23 @@
+[
+  {
+    "id": 6,
+    "title": "Elden Ring",
+    "imageCoverPath": "/default-cover.png",
+    "gameGenre": "RPG",
+    "priority": "High"
+  },
+  {
+    "id": 7,
+    "title": "Red Dead Redemption 2",
+    "imageCoverPath": "/default-cover.png",
+    "gameGenre": "Ação/Aventura",
+    "priority": "Medium"
+  },
+  {
+    "id": 8,
+    "title": "Dark Souls III",
+    "imageCoverPath": "/default-cover.png",
+    "gameGenre": "RPG",
+    "priority": "Low"
+  }
+]
